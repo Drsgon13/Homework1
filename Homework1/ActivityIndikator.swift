@@ -9,25 +9,14 @@ import SwiftUI
 
 struct ActivityIndikator: UIViewRepresentable {
     
-    typealias Context = UIViewRepresentableContext<Self>
-    typealias UIViewType = UIActivityIndicatorView
+    @Binding var isAnimating: Bool
 
-    let isAnimated: Bool
-
-    public func makeUIView(context: Context) -> UIViewType {
-        UIActivityIndicatorView(style: .large) // create the instance of the view
-        
+    let style: UIActivityIndicatorView.Style
+    func makeUIView(context: UIViewRepresentableContext<ActivityIndikator>) -> UIActivityIndicatorView {
+        return UIActivityIndicatorView(style: style)
     }
 
-    public func updateUIView(_ uiView: UIViewType, context: Context) {
-        // Check if isAnimated is true, and if the view is inactive.
-        if isAnimated && !uiView.isAnimating {
-            uiView.startAnimating() // Animate
-        }
-
-        // Check if isAnimated is false, and if the view is active.
-        if !isAnimated && uiView.isAnimating {
-            uiView.stopAnimating() // Stop animating
-        }
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndikator>) {
+        isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }

@@ -14,7 +14,7 @@ struct ModalWindowView: View {
         VStack {
             
             Toggle("Animating", isOn: $isAnimating)
-            ActivityIndikator(isAnimated: isAnimating)
+            ActivityIndikator(isAnimating: $isAnimating, style: .large)
             
             Button(action: {
                 self.showModal.toggle()
